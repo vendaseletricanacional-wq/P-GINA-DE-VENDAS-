@@ -1,0 +1,1924 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supremo Alicerce — Guia de IA para Construção Civil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --laranja: #F05A1A;
+  --laranja2: #FF7A3D;
+  --chumbo: #111110;
+  --chumbo2: #1C1C1A;
+  --chumbo3: #252522;
+  --chumbo4: #313130;
+  --cinza: #888880;
+  --cinza2: #BBBAB3;
+  --cinza3: #E8E7E0;
+  --branco: #F5F4EF;
+  --verde: #22A066;
+  --amarelo: #F0B429;
+  --font-head: 'Bebas Neue', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--chumbo);
+  color: var(--branco);
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* ─── UTILITÁRIOS ─── */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+.container-sm { max-width: 740px; margin: 0 auto; padding: 0 28px; }
+.laranja { color: var(--laranja); }
+.mono { font-family: var(--font-mono); }
+
+/* ─── BARRA TOPO ─── */
+.topbar {
+  background: var(--laranja);
+  padding: 10px 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+.topbar::before {
+  content: '⚡ LANÇAMENTO · ';
+  opacity: 0.7;
+}
+
+/* ─── NAV ─── */
+nav {
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  position: sticky; top: 0; z-index: 90;
+  background: rgba(17,17,16,0.95);
+  backdrop-filter: blur(12px);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-head);
+  font-size: 22px; letter-spacing: 0.05em;
+  color: var(--branco);
+  text-decoration: none;
+}
+.nav-logo-mark {
+  width: 34px; height: 34px;
+  background: var(--laranja); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 900; color: white;
+  font-family: var(--font-head);
+}
+.nav-cta {
+  background: var(--laranja);
+  color: white; font-weight: 600; font-size: 14px;
+  padding: 10px 22px; border-radius: 8px;
+  border: none; cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.nav-cta:hover { background: var(--laranja2); transform: translateY(-1px); }
+
+/* ─── HERO ─── */
+.hero {
+  padding: 100px 0 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* grid de fundo técnico */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(240,90,26,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240,90,26,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+/* glow laranja cantor direito */
+.hero::after {
+  content: '';
+  position: absolute; top: -100px; right: -200px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(240,90,26,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(240,90,26,0.12);
+  border: 1px solid rgba(240,90,26,0.3);
+  color: var(--laranja2);
+  font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 14px; border-radius: 999px;
+  margin-bottom: 28px;
+}
+
+.hero h1 {
+  font-family: var(--font-head);
+  font-size: clamp(56px, 8vw, 110px);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  color: var(--branco);
+  margin-bottom: 28px;
+}
+
+.hero h1 .linha-laranja {
+  color: var(--laranja);
+  display: block;
+}
+
+.hero h1 .linha-outline {
+  -webkit-text-stroke: 1.5px var(--cinza2);
+  color: transparent;
+  display: block;
+}
+
+.hero-sub {
+  font-size: 19px; font-weight: 300; line-height: 1.6;
+  color: var(--cinza2);
+  max-width: 560px;
+  margin-bottom: 48px;
+}
+
+.hero-sub strong { color: var(--branco); font-weight: 500; }
+
+.hero-ctas {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  margin-bottom: 64px;
+}
+
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--laranja);
+  color: white; font-weight: 600; font-size: 16px;
+  padding: 18px 36px; border-radius: 10px;
+  border: none; cursor: pointer;
+  transition: all 0.25s;
+  text-decoration: none;
+  position: relative; overflow: hidden;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+}
+.btn-primary:hover { background: var(--laranja2); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(240,90,26,0.4); }
+
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent;
+  color: var(--cinza2); font-size: 15px; font-weight: 400;
+  padding: 18px 8px;
+  border: none; cursor: pointer;
+  transition: color 0.2s;
+  text-decoration: none;
+}
+.btn-secondary:hover { color: var(--branco); }
+
+.hero-prova-social {
+  display: flex; align-items: center; gap: 16px;
+  flex-wrap: wrap;
+}
+
+.avatares {
+  display: flex;
+}
+.avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 2px solid var(--chumbo);
+  margin-left: -10px;
+  font-family: var(--font-head);
+  font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+}
+.avatar:first-child { margin-left: 0; }
+
+.prova-texto {
+  font-size: 13px; color: var(--cinza);
+}
+.prova-texto strong { color: var(--branco); }
+
+.estrelas { color: var(--amarelo); font-size: 14px; }
+
+/* ─── BARRA NÚMEROS ─── */
+.numeros-bar {
+  padding: 40px 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: var(--chumbo2);
+}
+.numeros-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.numero-item {
+  padding: 16px 32px;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.numero-item:last-child { border-right: none; }
+.numero-val {
+  font-family: var(--font-head);
+  font-size: 52px; line-height: 1;
+  color: var(--laranja);
+  letter-spacing: 0.02em;
+}
+.numero-label {
+  font-size: 13px; color: var(--cinza); margin-top: 4px;
+  font-weight: 400;
+}
+
+/* ─── PROBLEMA ─── */
+.problema {
+  padding: 100px 0;
+}
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px; color: var(--cinza);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-eyebrow::before {
+  content: '';
+  width: 28px; height: 1px; background: var(--cinza4, var(--cinza));
+}
+
+.problema h2 {
+  font-family: var(--font-head);
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  margin-bottom: 48px;
+}
+
+.dores-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.dor-item {
+  background: var(--chumbo2);
+  padding: 28px 32px;
+  display: flex; gap: 16px; align-items: flex-start;
+  transition: background 0.2s;
+}
+.dor-item:hover { background: var(--chumbo3); }
+.dor-icone {
+  font-size: 22px; flex-shrink: 0; margin-top: 2px;
+}
+.dor-titulo {
+  font-size: 15px; font-weight: 600; color: var(--branco);
+  margin-bottom: 6px;
+}
+.dor-desc {
+  font-size: 13px; color: var(--cinza); line-height: 1.5;
+}
+
+.virada {
+  margin-top: 64px;
+  padding: 48px;
+  background: var(--chumbo2);
+  border: 1px solid rgba(240,90,26,0.2);
+  border-left: 4px solid var(--laranja);
+  border-radius: 16px;
+  display: flex; gap: 32px; align-items: center;
+}
+.virada-icone {
+  font-size: 48px; flex-shrink: 0;
+}
+.virada h3 {
+  font-family: var(--font-head);
+  font-size: 36px; line-height: 1;
+  letter-spacing: 0.02em;
+  margin-bottom: 10px;
+}
+.virada p {
+  font-size: 16px; color: var(--cinza2); line-height: 1.6;
+}
+
+/* ─── O QUE ESTÁ DENTRO ─── */
+.conteudo-section {
+  padding: 100px 0;
+  background: var(--chumbo2);
+}
+.conteudo-section h2 {
+  font-family: var(--font-head);
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 0.95;
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+.conteudo-intro {
+  font-size: 17px; color: var(--cinza2); max-width: 560px;
+  line-height: 1.6; margin-bottom: 64px;
+}
+
+.etapas-lista {
+  display: flex; flex-direction: column; gap: 2px;
+}
+
+.etapa-linha {
+  display: flex; align-items: stretch;
+  background: var(--chumbo3);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.2s;
+  cursor: default;
+}
+.etapa-linha:hover {
+  background: var(--chumbo4);
+  transform: translateX(4px);
+}
+
+.etapa-num {
+  width: 72px; flex-shrink: 0;
+  background: rgba(240,90,26,0.08);
+  border-right: 1px solid rgba(240,90,26,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head);
+  font-size: 28px; color: var(--laranja);
+  letter-spacing: 0.05em;
+}
+
+.etapa-corpo2 {
+  flex: 1; padding: 20px 24px;
+  display: flex; align-items: center; gap: 20px;
+}
+
+.etapa-emoji { font-size: 22px; flex-shrink: 0; }
+
+.etapa-info2 { flex: 1; }
+.etapa-nome2 {
+  font-size: 16px; font-weight: 600; color: var(--branco);
+  margin-bottom: 3px;
+}
+.etapa-desc2 { font-size: 13px; color: var(--cinza); }
+
+.etapa-contagem {
+  text-align: right; flex-shrink: 0;
+}
+.contagem-num {
+  font-family: var(--font-mono);
+  font-size: 22px; font-weight: 500;
+  color: var(--laranja);
+  line-height: 1;
+}
+.contagem-label {
+  font-size: 11px; color: var(--cinza);
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+
+/* BÔNUS */
+.bonus-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  margin-top: 48px;
+}
+.bonus-card {
+  background: var(--chumbo);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 28px 24px;
+  position: relative; overflow: hidden;
+  transition: border-color 0.2s;
+}
+.bonus-card:hover { border-color: rgba(240,90,26,0.3); }
+.bonus-card::before {
+  content: 'BÔNUS';
+  position: absolute; top: 16px; right: 16px;
+  font-family: var(--font-mono); font-size: 10px;
+  color: var(--laranja);
+  background: rgba(240,90,26,0.1);
+  padding: 3px 8px; border-radius: 4px;
+  letter-spacing: 0.1em;
+}
+.bonus-icone { font-size: 32px; margin-bottom: 16px; }
+.bonus-titulo {
+  font-size: 15px; font-weight: 600; color: var(--branco);
+  margin-bottom: 8px;
+}
+.bonus-desc { font-size: 13px; color: var(--cinza); line-height: 1.5; }
+
+/* ─── PARA QUEM É ─── */
+.para-quem {
+  padding: 100px 0;
+}
+.para-quem h2 {
+  font-family: var(--font-head);
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 0.95; letter-spacing: 0.02em;
+  margin-bottom: 48px;
+}
+.perfis-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+.perfil-card {
+  background: var(--chumbo2);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 32px 28px;
+  transition: all 0.2s;
+}
+.perfil-card:hover {
+  border-color: rgba(240,90,26,0.25);
+  transform: translateY(-4px);
+}
+.perfil-emoji { font-size: 36px; margin-bottom: 16px; }
+.perfil-titulo {
+  font-family: var(--font-head);
+  font-size: 26px; letter-spacing: 0.03em;
+  color: var(--branco); margin-bottom: 10px;
+}
+.perfil-desc { font-size: 14px; color: var(--cinza); line-height: 1.6; }
+.perfil-lista { margin-top: 16px; }
+.perfil-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--cinza2);
+  margin-bottom: 6px;
+}
+.perfil-item::before {
+  content: '→';
+  color: var(--laranja); font-size: 12px; flex-shrink: 0;
+}
+
+/* nao para quem */
+.nao-para {
+  margin-top: 48px;
+  padding: 28px 32px;
+  background: var(--chumbo2);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  display: flex; gap: 20px; align-items: flex-start;
+}
+.nao-para-titulo {
+  font-size: 15px; font-weight: 600; color: var(--cinza2);
+  margin-bottom: 10px;
+}
+.nao-item {
+  font-size: 13px; color: var(--cinza);
+  display: flex; gap: 8px; align-items: center;
+  margin-bottom: 4px;
+}
+.nao-item::before { content: '✕'; color: rgba(255,255,255,0.2); font-size: 11px; }
+
+/* ─── DEPOIMENTOS ─── */
+.depoimentos {
+  padding: 100px 0;
+  background: var(--chumbo2);
+  overflow: hidden;
+}
+.depoimentos h2 {
+  font-family: var(--font-head);
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 0.95; letter-spacing: 0.02em;
+  margin-bottom: 16px;
+}
+.depo-intro { font-size: 17px; color: var(--cinza2); margin-bottom: 56px; }
+
+.depo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.depo-card {
+  background: var(--chumbo3);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 28px;
+}
+.depo-card.destaque {
+  background: var(--laranja);
+  border-color: transparent;
+}
+.depo-estrelas { margin-bottom: 16px; font-size: 14px; color: var(--amarelo); }
+.depo-card.destaque .depo-estrelas { color: rgba(255,255,255,0.8); }
+.depo-texto {
+  font-size: 15px; line-height: 1.6; color: var(--cinza2);
+  margin-bottom: 24px;
+  font-style: italic;
+}
+.depo-card.destaque .depo-texto { color: rgba(255,255,255,0.9); font-style: normal; }
+.depo-autor { display: flex; align-items: center; gap: 12px; }
+.depo-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head); font-size: 14px;
+  color: white; flex-shrink: 0;
+}
+.depo-nome { font-size: 14px; font-weight: 600; color: var(--branco); }
+.depo-card.destaque .depo-nome { color: white; }
+.depo-cargo { font-size: 12px; color: var(--cinza); }
+.depo-card.destaque .depo-cargo { color: rgba(255,255,255,0.7); }
+
+/* ─── GARANTIA ─── */
+.garantia-strip {
+  padding: 80px 0;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.garantia-inner {
+  display: flex; gap: 64px; align-items: center;
+}
+.garantia-badge {
+  width: 160px; height: 160px; flex-shrink: 0;
+  border: 3px solid var(--laranja);
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+.garantia-numero {
+  font-family: var(--font-head);
+  font-size: 52px; line-height: 1;
+  color: var(--laranja);
+}
+.garantia-dias { font-size: 16px; font-weight: 600; color: var(--branco); }
+.garantia-texto-area h3 {
+  font-family: var(--font-head);
+  font-size: 42px; line-height: 1;
+  letter-spacing: 0.02em; margin-bottom: 12px;
+}
+.garantia-texto-area p {
+  font-size: 16px; color: var(--cinza2); line-height: 1.6; max-width: 480px;
+}
+
+/* ─── PREÇO ─── */
+.preco-section {
+  padding: 100px 0;
+  background: var(--chumbo2);
+  position: relative; overflow: hidden;
+}
+.preco-section::before {
+  content: '';
+  position: absolute; bottom: -200px; left: 50%;
+  transform: translateX(-50%);
+  width: 800px; height: 400px;
+  background: radial-gradient(ellipse, rgba(240,90,26,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.preco-section h2 {
+  font-family: var(--font-head);
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 0.95; letter-spacing: 0.02em;
+  margin-bottom: 16px;
+}
+.preco-intro { font-size: 17px; color: var(--cinza2); margin-bottom: 56px; }
+
+.preco-card {
+  max-width: 520px; margin: 0 auto;
+  background: var(--chumbo);
+  border: 1px solid rgba(240,90,26,0.3);
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+}
+
+.preco-topo {
+  background: var(--laranja);
+  padding: 16px 28px;
+  text-align: center;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: white;
+}
+
+.preco-corpo {
+  padding: 40px 40px 32px;
+  text-align: center;
+}
+
+.preco-de {
+  font-size: 16px; color: var(--cinza);
+  text-decoration: line-through;
+  margin-bottom: 4px;
+}
+
+.preco-por {
+  font-family: var(--font-head);
+  font-size: 84px; line-height: 1;
+  color: var(--branco);
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
+.preco-por span {
+  font-size: 36px; vertical-align: super;
+  line-height: 0;
+}
+
+.preco-parcelas {
+  font-size: 14px; color: var(--cinza);
+  margin-bottom: 32px;
+}
+.preco-parcelas strong { color: var(--branco); }
+
+.preco-inclusos {
+  text-align: left;
+  margin-bottom: 32px;
+  padding: 24px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 12px;
+}
+
+.incluso-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 14px; color: var(--cinza2);
+  margin-bottom: 10px; line-height: 1.4;
+}
+.incluso-item:last-child { margin-bottom: 0; }
+.incluso-check {
+  width: 18px; height: 18px;
+  background: rgba(34,160,102,0.15);
+  border: 1px solid rgba(34,160,102,0.3);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+  font-size: 10px; color: var(--verde);
+}
+
+.btn-comprar {
+  width: 100%;
+  background: var(--laranja);
+  color: white; font-size: 17px; font-weight: 700;
+  padding: 20px;
+  border-radius: 12px; border: none; cursor: pointer;
+  transition: all 0.25s;
+  position: relative; overflow: hidden;
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+.btn-comprar::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 60%);
+}
+.btn-comprar:hover { background: var(--laranja2); transform: translateY(-2px); box-shadow: 0 16px 48px rgba(240,90,26,0.45); }
+
+.preco-seguro {
+  margin-top: 16px;
+  font-size: 12px; color: var(--cinza);
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+
+.urgencia {
+  margin-top: 40px; padding: 20px 24px;
+  background: rgba(240,180,41,0.08);
+  border: 1px solid rgba(240,180,41,0.2);
+  border-radius: 12px;
+  text-align: center;
+  font-size: 14px; color: var(--cinza2);
+}
+.urgencia strong { color: var(--amarelo); }
+
+/* ─── FAQ ─── */
+.faq { padding: 100px 0; }
+.faq h2 {
+  font-family: var(--font-head);
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 0.95; letter-spacing: 0.02em;
+  margin-bottom: 48px;
+}
+.faq-lista { display: flex; flex-direction: column; gap: 2px; }
+.faq-item {
+  background: var(--chumbo2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.faq-pergunta {
+  padding: 22px 28px;
+  display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer;
+  font-size: 16px; font-weight: 500; color: var(--branco);
+  gap: 16px;
+}
+.faq-seta {
+  font-size: 20px; color: var(--laranja);
+  transition: transform 0.3s; flex-shrink: 0;
+}
+.faq-item.aberto .faq-seta { transform: rotate(45deg); }
+.faq-resposta {
+  display: none;
+  padding: 0 28px 22px;
+  font-size: 15px; color: var(--cinza2); line-height: 1.65;
+}
+.faq-item.aberto .faq-resposta { display: block; }
+
+/* ─── CTA FINAL ─── */
+.cta-final {
+  padding: 120px 0;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-final::before {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px; height: 400px;
+  background: radial-gradient(ellipse, rgba(240,90,26,0.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+.cta-final h2 {
+  font-family: var(--font-head);
+  font-size: clamp(52px, 8vw, 100px);
+  line-height: 0.92; letter-spacing: 0.02em;
+  margin-bottom: 24px;
+}
+.cta-final p {
+  font-size: 18px; color: var(--cinza2);
+  max-width: 500px; margin: 0 auto 48px;
+  line-height: 1.6;
+}
+
+/* ─── RODAPÉ ─── */
+footer {
+  padding: 40px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  background: var(--chumbo);
+}
+.footer-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-logo {
+  font-family: var(--font-head);
+  font-size: 18px; letter-spacing: 0.05em;
+  color: var(--cinza);
+  display: flex; align-items: center; gap: 8px;
+}
+.footer-links {
+  display: flex; gap: 28px;
+}
+.footer-links a {
+  font-size: 13px; color: var(--cinza);
+  text-decoration: none; transition: color 0.15s;
+}
+.footer-links a:hover { color: var(--branco); }
+.footer-copy {
+  font-size: 12px; color: var(--cinza);
+  width: 100%; text-align: center; margin-top: 8px;
+}
+
+/* ─── ANIMAÇÕES ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.anim { animation: fadeUp 0.7s ease both; }
+.anim-1 { animation-delay: 0.1s; }
+.anim-2 { animation-delay: 0.25s; }
+.anim-3 { animation-delay: 0.4s; }
+.anim-4 { animation-delay: 0.55s; }
+
+/* ─── RESPONSIVO ─── */
+@media (max-width: 768px) {
+  .numeros-grid { grid-template-columns: repeat(2, 1fr); }
+  .numero-item:nth-child(2) { border-right: none; }
+  .dores-grid { grid-template-columns: 1fr; }
+  .perfis-grid { grid-template-columns: 1fr; }
+  .depo-grid { grid-template-columns: 1fr; }
+  .bonus-grid { grid-template-columns: 1fr; }
+  .virada { flex-direction: column; gap: 20px; }
+  .garantia-inner { flex-direction: column; text-align: center; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .etapa-corpo2 { flex-wrap: wrap; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 52px; }
+  .hero-ctas { flex-direction: column; align-items: flex-start; }
+  .preco-por { font-size: 60px; }
+  .preco-corpo { padding: 28px 24px; }
+}
+/* ─── COMBO SECTION ─── */
+.combo-section {
+  padding: 100px 0;
+  background: var(--chumbo);
+  position: relative; overflow: hidden;
+}
+.combo-section::before {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px; height: 500px;
+  background: radial-gradient(ellipse, rgba(29,122,80,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+.combo-topo { text-align: center; margin-bottom: 64px; }
+.combo-topo h2 {
+  font-family: var(--font-head);
+  font-size: clamp(42px, 6vw, 72px);
+  line-height: 0.95; letter-spacing: 0.02em;
+  margin-bottom: 16px;
+}
+.combo-intro {
+  font-size: 17px; color: var(--cinza2);
+  max-width: 560px; margin: 0 auto;
+  line-height: 1.6;
+}
+
+.combo-versus {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 64px;
+}
+.combo-card {
+  background: var(--chumbo2);
+  border-radius: 20px;
+  padding: 32px 28px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.combo-card-a { border-top: 3px solid var(--laranja); }
+.combo-card-b { border-top: 3px solid var(--verde); }
+.combo-card-badge {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 999px;
+  display: inline-block; margin-bottom: 20px;
+}
+.combo-card-icone { font-size: 36px; margin-bottom: 12px; }
+.combo-card-titulo {
+  font-family: var(--font-head);
+  font-size: 28px; line-height: 1;
+  letter-spacing: 0.03em;
+  color: var(--branco); margin-bottom: 12px;
+}
+.combo-card-desc {
+  font-size: 14px; color: var(--cinza2);
+  line-height: 1.6; margin-bottom: 20px;
+}
+.combo-lista { display: flex; flex-direction: column; gap: 8px; }
+.combo-item {
+  font-size: 13px; display: flex; gap: 8px; align-items: flex-start;
+  line-height: 1.4;
+}
+.combo-item-sim { color: var(--cinza2); }
+.combo-item-sim::before { content: none; }
+.combo-item-nao { color: var(--cinza); opacity: 0.5; }
+
+.combo-mais {
+  font-family: var(--font-head);
+  font-size: 64px; color: var(--laranja);
+  display: flex; align-items: center; justify-content: center;
+  padding-top: 80px;
+  opacity: 0.7;
+}
+
+/* FLUXO */
+.combo-fluxo {
+  background: var(--chumbo2);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 20px;
+  padding: 40px;
+  margin-bottom: 64px;
+}
+.combo-fluxo-titulo {
+  font-family: var(--font-mono);
+  font-size: 12px; color: var(--cinza);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  margin-bottom: 28px; text-align: center;
+}
+.combo-passos {
+  display: flex; align-items: flex-start;
+  gap: 0; flex-wrap: wrap;
+}
+.combo-passo {
+  flex: 1; min-width: 160px;
+  text-align: center; padding: 0 12px;
+}
+.combo-passo-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--laranja); color: white;
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 10px;
+}
+.combo-passo-icone { font-size: 28px; margin-bottom: 10px; }
+.combo-passo-texto {
+  font-size: 13px; color: var(--cinza2); line-height: 1.5;
+}
+.combo-passo-texto strong { color: var(--branco); }
+.combo-seta-flow {
+  font-size: 24px; color: var(--cinza);
+  padding-top: 14px; flex-shrink: 0;
+}
+
+/* CTA COMBO */
+.combo-cta-area {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 48px; align-items: center;
+  background: var(--chumbo2);
+  border: 1px solid rgba(240,90,26,0.2);
+  border-radius: 24px;
+  padding: 48px;
+  overflow: hidden;
+  position: relative;
+}
+.combo-cta-area::before {
+  content: '';
+  position: absolute; top: -50px; right: -50px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(240,90,26,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+.combo-cta-badge {
+  font-size: 11px; font-weight: 600;
+  color: var(--laranja); text-transform: uppercase;
+  letter-spacing: 0.1em; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 6px;
+}
+.combo-cta-texto h3 {
+  font-family: var(--font-head);
+  font-size: 42px; line-height: 0.95;
+  letter-spacing: 0.02em; margin-bottom: 14px;
+}
+.combo-cta-texto p {
+  font-size: 15px; color: var(--cinza2);
+  line-height: 1.6; margin-bottom: 0;
+}
+.combo-economia {
+  display: flex; align-items: center; gap: 16px;
+  margin-top: 24px; flex-wrap: wrap;
+}
+.combo-eco-item { text-align: center; }
+.combo-eco-val {
+  font-family: var(--font-head);
+  font-size: 32px; color: var(--branco);
+  line-height: 1;
+}
+.combo-eco-de {
+  font-size: 12px; color: var(--cinza);
+  text-decoration: line-through; margin-bottom: 2px;
+}
+.combo-eco-label { font-size: 11px; color: var(--cinza); margin-top: 2px; }
+.combo-eco-plus, .combo-eco-equal {
+  font-family: var(--font-head);
+  font-size: 28px; color: var(--cinza);
+}
+.combo-eco-total { border-left: 1px solid rgba(255,255,255,0.1); padding-left: 16px; }
+
+/* MOCK VISUAL */
+.combo-cta-visual {
+  display: flex; gap: 16px; justify-content: center;
+  align-items: flex-start;
+}
+.combo-mock-guia {
+  background: var(--chumbo3);
+  border-radius: 12px;
+  padding: 16px;
+  width: 160px;
+  border: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+}
+.combo-mock-a { transform: rotate(-3deg); margin-top: 20px; border-top: 3px solid var(--laranja); }
+.combo-mock-b { transform: rotate(3deg); border-top: 3px solid var(--verde); }
+.mock-topo-bar {
+  height: 4px; border-radius: 2px;
+  background: var(--laranja); margin-bottom: 12px;
+}
+.mock-linha { height: 8px; background: rgba(255,255,255,0.08); border-radius: 4px; margin-bottom: 6px; }
+.mock-linha-lg { width: 90%; }
+.mock-linha-md { width: 70%; }
+.mock-linha-sm { width: 80%; }
+.mock-linha-xs { width: 50%; }
+.mock-spacer { height: 8px; }
+.mock-row { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+.mock-box {
+  width: 24px; height: 24px; border-radius: 4px; flex-shrink: 0;
+}
+.mock-box-orange { background: rgba(240,90,26,0.3); }
+.mock-foto-area {
+  height: 60px; background: rgba(255,255,255,0.05);
+  border-radius: 8px; margin-bottom: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+.mock-render-row { display: flex; gap: 4px; margin-top: 8px; }
+.mock-render {
+  flex: 1; height: 24px; border-radius: 4px;
+}
+.mock-render-1 { background: rgba(29,122,80,0.3); }
+.mock-render-2 { background: rgba(240,90,26,0.2); }
+.mock-render-3 { background: rgba(29,122,80,0.15); }
+.mock-label {
+  font-family: var(--font-mono);
+  font-size: 9px; color: var(--cinza);
+  text-align: center; margin-top: 10px;
+  text-transform: uppercase; letter-spacing: 0.08em;
+}
+
+/* GRID DOS DOIS GUIAS INDIVIDUAIS */
+.preco-dois-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+@media (max-width: 640px) {
+  .preco-dois-grid { grid-template-columns: 1fr; }
+}
+
+/* BUNDLE PRICE CARD */
+.preco-bundle-label {
+  font-family: var(--font-mono);
+  font-size: 12px; color: var(--cinza);
+  text-transform: uppercase; letter-spacing: 0.1em;
+  text-align: center; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px; justify-content: center;
+}
+.preco-bundle-label::before, .preco-bundle-label::after {
+  content: ''; flex: 1; max-width: 120px;
+  height: 1px; background: rgba(255,255,255,0.08);
+}
+.preco-card-bundle { max-width: 580px; border-color: rgba(29,122,80,0.3); }
+
+@media (max-width: 768px) {
+  .combo-versus { grid-template-columns: 1fr; }
+  .combo-mais { padding-top: 0; font-size: 40px; text-align: center; }
+  .combo-passos { flex-direction: column; }
+  .combo-seta-flow { transform: rotate(90deg); align-self: center; }
+  .combo-cta-area { grid-template-columns: 1fr; }
+  .combo-cta-visual { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- BARRA TOPO -->
+<div class="topbar">
+  Acesso imediato após pagamento · Garantia de 7 dias ou seu dinheiro de volta
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">SA</div>
+      SUPREMO ALICERCE
+    </a>
+    <a href="#preco" class="nav-cta">Quero o Guia →</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow anim anim-1">
+      <span>🏗</span> Para quem constrói de verdade
+    </div>
+    <h1 class="anim anim-2">
+      <span class="linha-laranja">CONSTRUA</span>
+      COM A PRECISÃO
+      <span class="linha-outline" style="font-size:1.18em;">DE UMA MÁQUINA</span>
+    </h1>
+    <p class="hero-sub anim anim-3">
+      O guia de comandos para IA na Construção Civil. <strong>Da fundação ao telhado</strong> — calcule materiais, fiscalize etapas e evite o desperdício que destrói orçamentos.
+    </p>
+    <div class="hero-ctas anim anim-4">
+      <a href="#preco" class="btn-primary">
+        Quero o Guia Completo
+        <span style="font-size:18px">→</span>
+      </a>
+      <a href="#conteudo" class="btn-secondary">
+        Ver o que está incluído ↓
+      </a>
+    </div>
+
+    <div class="hero-prova-social anim anim-4">
+      <div class="avatares">
+        <div class="avatar" style="background:#E85C1A;">MR</div>
+        <div class="avatar" style="background:#1D7A50;">JC</div>
+        <div class="avatar" style="background:#1A4FA0;">PS</div>
+        <div class="avatar" style="background:#B87A00;">AF</div>
+        <div class="avatar" style="background:#6B3FA0;">RM</div>
+      </div>
+      <div>
+        <div class="estrelas">★★★★★</div>
+        <div class="prova-texto">
+          Mais de <strong>1.200 profissionais</strong> já usam o guia nas obras
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ NÚMEROS ═══════════════════════════════ -->
+<div class="numeros-bar">
+  <div class="container">
+    <div class="numeros-grid">
+      <div class="numero-item">
+        <div class="numero-val">10</div>
+        <div class="numero-label">Etapas da obra cobertas</div>
+      </div>
+      <div class="numero-item">
+        <div class="numero-val">60+</div>
+        <div class="numero-label">Prompts prontos para usar</div>
+      </div>
+      <div class="numero-item">
+        <div class="numero-val">0</div>
+        <div class="numero-label">Conhecimento técnico necessário</div>
+      </div>
+      <div class="numero-item">
+        <div class="numero-val">∞</div>
+        <div class="numero-label">Obras onde pode aplicar</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ PROBLEMA ═══════════════════════════════ -->
+<section class="problema">
+  <div class="container">
+    <div class="section-eyebrow">O problema que todo dono de obra conhece</div>
+    <h2>VOCÊ JÁ PASSOU POR ALGUM DESSES?</h2>
+
+    <div class="dores-grid">
+      <div class="dor-item">
+        <div class="dor-icone">💸</div>
+        <div>
+          <div class="dor-titulo">Sobra material ou falta na hora H</div>
+          <div class="dor-desc">Comprou a mais e perdeu dinheiro, ou faltou material e a obra parou por dias.</div>
+        </div>
+      </div>
+      <div class="dor-item">
+        <div class="dor-icone">😤</div>
+        <div>
+          <div class="dor-titulo">Prestadores cobrando errado</div>
+          <div class="dor-desc">Lista do pedreiro inflada, medição incorreta, orçamento que não fecha com a realidade.</div>
+        </div>
+      </div>
+      <div class="dor-item">
+        <div class="dor-icone">🔍</div>
+        <div>
+          <div class="dor-titulo">Não sabe se o serviço foi feito certo</div>
+          <div class="dor-desc">A obra avança mas você não tem como verificar qualidade sem pagar um técnico a cada visita.</div>
+        </div>
+      </div>
+      <div class="dor-item">
+        <div class="dor-icone">📅</div>
+        <div>
+          <div class="dor-titulo">Atrasos que viram bola de neve</div>
+          <div class="dor-desc">Uma etapa atrasou, a próxima equipe foi embora, o cronograma virou caos.</div>
+        </div>
+      </div>
+      <div class="dor-item">
+        <div class="dor-icone">😰</div>
+        <div>
+          <div class="dor-titulo">Problemas que aparecem tarde demais</div>
+          <div class="dor-desc">Trinca depois da pintura, vazamento depois de fechar o piso, ferragem errada depois da concretagem.</div>
+        </div>
+      </div>
+      <div class="dor-item">
+        <div class="dor-icone">📞</div>
+        <div>
+          <div class="dor-titulo">Depender de engenheiro para tudo</div>
+          <div class="dor-desc">Sem acesso ao técnico, qualquer dúvida técnica paralisa a decisão e a obra espera.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="virada">
+      <div class="virada-icone">🤖</div>
+      <div>
+        <h3>A IA RESOLVE TUDO ISSO — SE VOCÊ SOUBER PERGUNTAR</h3>
+        <p>O problema não é a ferramenta. É que 99% dos prompts que as pessoas usam são genéricos demais para funcionar na prática da construção civil. Este guia resolve exatamente isso: <strong style="color:var(--branco)">comandos precisos, por etapa, feitos por quem entende de obra.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CONTEÚDO ═══════════════════════════════ -->
+<section class="conteudo-section" id="conteudo">
+  <div class="container">
+    <div class="section-eyebrow">O que está dentro do guia</div>
+    <h2>DO ALICERCE AO<br>TELHADO, COBERTO</h2>
+    <p class="conteudo-intro">Cada etapa tem prompts para o profissional calcular com precisão e prompts para o dono fiscalizar com confiança. Além de checklists interativos de qualidade.</p>
+
+    <div class="etapas-lista">
+
+      <div class="etapa-linha">
+        <div class="etapa-num">01</div>
+        <div class="etapa-corpo2">
+          <div class="etapa-emoji">🏗</div>
+          <div class="etapa-info2">
+            <div class="etapa-nome2">Terraplenagem e Locação</div>
+            <div class="etapa-desc2">Volume de corte/aterro, horas de máquina, drenagem, gabarito e estacas</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="etapa-linha">
+        <div class="etapa-num">02</div>
+        <div class="etapa-corpo2">
+          <div class="etapa-emoji">⚓</div>
+          <div class="etapa-info2">
+            <div class="etapa-nome2">Fundação e Ferragem</div>
+            <div class="etapa-desc2">Baldrame, sapatas, concreto, ferragem, traços, comparação com lista do ferreiro</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="etapa-linha">
+        <div class="etapa-num">03</div>
+        <div class="etapa-corpo2">
+          <div class="etapa-emoji">🧱</div>
+          <div class="etapa-info2">
+            <div class="etapa-nome2">Alvenaria, Colunas e Laje</div>
+            <div class="etapa-desc2">Tijolos, vergas, contravergas, vigas aéreas, armação e laje completa</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="etapa-linha">
+        <div class="etapa-num">04</div>
+        <div class="etapa-corpo2">
+          <div class="etapa-emoji">🏠</div>
+          <div class="etapa-info2">
+            <div class="etapa-nome2">Cobertura e Telhado</div>
+            <div class="etapa-desc2">Madeiramento, telhas, calhas, rufos, inclinação ideal, impermeabilização</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="etapa-linha">
+        <div class="etapa-num">05</div>
+        <div class="etapa-corpo2">
+          <div class="etapa-emoji">⚡</div>
+          <div class="etapa-info2">
+            <div class="etapa-nome2">Instalações Elétricas</div>
+            <div class="etapa-desc2">Quadro, circuitos, bitolas, aterramento, SPDA e como fiscalizar como leigo</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="etapa-linha">
+        <div class="etapa-num">06</div>
+        <div class="etapa-corpo2">
+          <div class="etapa-emoji">🚿</div>
+          <div class="etapa-info2">
+            <div class="etapa-nome2">Instalações Hidrossanitárias</div>
+            <div class="etapa-desc2">Água fria, esgoto, registros, caixa d'água, gordura e teste de estanqueidade</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="etapa-linha">
+        <div class="etapa-num">07</div>
+        <div class="etapa-corpo2">
+          <div class="etapa-emoji">🪟</div>
+          <div class="etapa-info2">
+            <div class="etapa-nome2">Revestimento e Acabamento</div>
+            <div class="etapa-desc2">Piso, azulejo, argamassa AC, rejunte, nivelador e como checar assentamento</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="etapa-linha">
+        <div class="etapa-num">08</div>
+        <div class="etapa-corpo2">
+          <div class="etapa-emoji">🎨</div>
+          <div class="etapa-info2">
+            <div class="etapa-nome2">Pintura, Gesso e Fachada</div>
+            <div class="etapa-desc2">Selador, massa, látex, textura, grafiato, gesso liso e cálculo por demão</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="etapa-linha">
+        <div class="etapa-num">09</div>
+        <div class="etapa-corpo2">
+          <div class="etapa-emoji">📊</div>
+          <div class="etapa-info2">
+            <div class="etapa-nome2">Gestão, Cronograma e Resolução de Crises</div>
+            <div class="etapa-desc2">Cronograma físico-financeiro, negociação, contratos, conferência de medição e emergências</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="etapa-linha" style="border: 1px solid rgba(240,90,26,0.25); border-radius: 10px;">
+        <div class="etapa-num" style="background: rgba(240,90,26,0.15);">★</div>
+        <div class="etapa-corpo2">
+          <div class="etapa-emoji">🏠</div>
+          <div class="etapa-info2">
+            <div class="etapa-nome2" style="color:var(--laranja2);">Fiscalização do Dono da Obra</div>
+            <div class="etapa-desc2">Checklists exclusivos, como conferir cada etapa sem ser técnico e evitar pagar por serviço mal feito</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BÔNUS -->
+    <div style="margin-top:64px;">
+      <div class="section-eyebrow">Incluído gratuitamente</div>
+      <h2 style="font-family:var(--font-head);font-size:42px;letter-spacing:0.02em;margin-bottom:32px;">BÔNUS EXCLUSIVOS</h2>
+    </div>
+
+    <div class="bonus-grid">
+      <div class="bonus-card">
+        <div class="bonus-icone">📋</div>
+        <div class="bonus-titulo">Prompt 0 — O Cérebro da Obra</div>
+        <div class="bonus-desc">Configuração inicial que transforma qualquer IA em engenheiro sênior com tabelas, normas ABNT e checklists automáticos.</div>
+      </div>
+      <div class="bonus-card">
+        <div class="bonus-icone">⚠️</div>
+        <div class="bonus-titulo">Prompt de Emergência</div>
+        <div class="bonus-desc">Para quando algo deu errado na obra. Diagnóstico, gravidade e solução em menos de 2 minutos. Funciona 24h.</div>
+      </div>
+      <div class="bonus-card">
+        <div class="bonus-icone">🤝</div>
+        <div class="bonus-titulo">Prompt de Negociação</div>
+        <div class="bonus-desc">Compare qualquer orçamento de prestador com preços reais de mercado antes de assinar qualquer contrato.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ COMBO VISUAL ═══════════════════════════════ -->
+<section class="combo-section">
+  <div class="container">
+
+    <div class="combo-topo">
+      <div class="section-eyebrow">Dupla imbatível</div>
+      <h2>O GUIA DE TEXTO<br>CALCULA. O GUIA VISUAL<br><span style="color:var(--laranja)">ENXERGA.</span></h2>
+      <p class="combo-intro">Sozinhos, cada guia já entrega resultado. Juntos, eles cobrem a obra de ponta a ponta — do número à imagem, do cálculo à realidade fotografada.</p>
+    </div>
+
+    <div class="combo-versus">
+      <div class="combo-card combo-card-a">
+        <div class="combo-card-badge" style="background:rgba(240,90,26,0.15);color:var(--laranja2);">Guia que você está vendo</div>
+        <div class="combo-card-icone">📋</div>
+        <div class="combo-card-titulo">GUIA DE PROMPTS<br>DE TEXTO</div>
+        <div class="combo-card-desc">Você digita os dados da obra, a IA faz os cálculos e entrega tabelas com memória de cálculo, normas ABNT e checklists.</div>
+        <div class="combo-lista">
+          <div class="combo-item combo-item-sim">✓ Calcula quantidade de materiais</div>
+          <div class="combo-item combo-item-sim">✓ Compara lista do pedreiro</div>
+          <div class="combo-item combo-item-sim">✓ Gera checklist de qualidade</div>
+          <div class="combo-item combo-item-sim">✓ Dimensiona estrutura e instalações</div>
+          <div class="combo-item combo-item-nao">— Não analisa fotos reais da obra</div>
+          <div class="combo-item combo-item-nao">— Não visualiza acabamentos antes de comprar</div>
+          <div class="combo-item combo-item-nao">— Não cria relatórios fotográficos</div>
+        </div>
+      </div>
+
+      <div class="combo-mais">+</div>
+
+      <div class="combo-card combo-card-b">
+        <div class="combo-card-badge" style="background:rgba(29,122,80,0.15);color:#4ADE80;">Complemento visual</div>
+        <div class="combo-card-icone">📸</div>
+        <div class="combo-card-titulo">GUIA DE PROMPTS<br>VISUAIS</div>
+        <div class="combo-card-desc">Você envia fotos, esboços ou plantas da obra — a IA analisa, diagnostica, gera renders e cria visualizações profissionais.</div>
+        <div class="combo-lista">
+          <div class="combo-item combo-item-sim">✓ Analisa fotos de ferragem, alvenaria e estrutura</div>
+          <div class="combo-item combo-item-sim">✓ Simula cores e revestimentos antes de comprar</div>
+          <div class="combo-item combo-item-sim">✓ Transforma esboços em renders profissionais</div>
+          <div class="combo-item combo-item-sim">✓ Gera relatório fotográfico da obra</div>
+          <div class="combo-item combo-item-nao">— Não faz cálculos estruturais</div>
+          <div class="combo-item combo-item-nao">— Não gera tabelas técnicas</div>
+          <div class="combo-item combo-item-nao">— Não compara orçamentos</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FLUXO DE USO COMBINADO -->
+    <div class="combo-fluxo">
+      <div class="combo-fluxo-titulo">Como os dois guias funcionam juntos na prática</div>
+      <div class="combo-passos">
+        <div class="combo-passo">
+          <div class="combo-passo-num">1</div>
+          <div class="combo-passo-icone">📋</div>
+          <div class="combo-passo-texto">Use o <strong>Guia de Texto</strong> para calcular a quantidade exata de tijolos, argamassa e ferragem da alvenaria</div>
+        </div>
+        <div class="combo-seta-flow">→</div>
+        <div class="combo-passo">
+          <div class="combo-passo-num">2</div>
+          <div class="combo-passo-icone">📸</div>
+          <div class="combo-passo-texto">Use o <strong>Guia Visual</strong> para fotografar a parede em execução e pedir à IA que analise prumo, juntas e qualidade</div>
+        </div>
+        <div class="combo-seta-flow">→</div>
+        <div class="combo-passo">
+          <div class="combo-passo-num">3</div>
+          <div class="combo-passo-icone">🎨</div>
+          <div class="combo-passo-texto">Antes do acabamento, use o <strong>Guia Visual</strong> para simular a cor e o revestimento na foto real da sua parede</div>
+        </div>
+        <div class="combo-seta-flow">→</div>
+        <div class="combo-passo">
+          <div class="combo-passo-num">4</div>
+          <div class="combo-passo-icone">✅</div>
+          <div class="combo-passo-texto">Use o <strong>Checklist do Guia de Texto</strong> para liberar a etapa com segurança antes de pagar o pedreiro</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA COMBO -->
+    <div class="combo-cta-area">
+      <div class="combo-cta-texto">
+        <div class="combo-cta-badge">⚡ Oferta especial · Apenas no lançamento</div>
+        <h3>LEVE OS DOIS POR<br>UM PREÇO ESPECIAL</h3>
+        <p>Comprando o Pack Completo você leva o Guia de Texto <strong>+</strong> o Guia Visual com desconto exclusivo. Cobertura total da sua obra — do cálculo à imagem.</p>
+        <div class="combo-economia">
+          <div class="combo-eco-item">
+            <div class="combo-eco-val">R$47</div>
+            <div class="combo-eco-label">Guia de Texto</div>
+          </div>
+          <div class="combo-eco-plus">+</div>
+          <div class="combo-eco-item">
+            <div class="combo-eco-val">R$47</div>
+            <div class="combo-eco-label">Guia Visual</div>
+          </div>
+          <div class="combo-eco-equal">=</div>
+          <div class="combo-eco-item combo-eco-total">
+            <div class="combo-eco-de">R$94 separados</div>
+            <div class="combo-eco-val" style="color:var(--laranja);">R$84,60</div>
+            <div class="combo-eco-label" style="color:var(--verde);">10% de desconto · Você economiza R$9,40</div>
+          </div>
+        </div>
+        <a href="#preco" class="btn-primary" style="margin-top:24px;display:inline-flex;">
+          Ver Pack Completo →
+        </a>
+      </div>
+      <div class="combo-cta-visual">
+        <div class="combo-mock-guia combo-mock-a">
+          <div class="mock-topo-bar"></div>
+          <div class="mock-linha mock-linha-lg"></div>
+          <div class="mock-linha mock-linha-md"></div>
+          <div class="mock-spacer"></div>
+          <div class="mock-row">
+            <div class="mock-box mock-box-orange"></div>
+            <div>
+              <div class="mock-linha mock-linha-sm"></div>
+              <div class="mock-linha mock-linha-xs"></div>
+            </div>
+          </div>
+          <div class="mock-row">
+            <div class="mock-box mock-box-orange"></div>
+            <div>
+              <div class="mock-linha mock-linha-sm"></div>
+              <div class="mock-linha mock-linha-xs"></div>
+            </div>
+          </div>
+          <div class="mock-row">
+            <div class="mock-box mock-box-orange"></div>
+            <div>
+              <div class="mock-linha mock-linha-sm"></div>
+              <div class="mock-linha mock-linha-xs"></div>
+            </div>
+          </div>
+          <div class="mock-label">Guia de Texto</div>
+        </div>
+        <div class="combo-mock-guia combo-mock-b">
+          <div class="mock-topo-bar" style="background:var(--verde);"></div>
+          <div class="mock-foto-area">
+            <div class="mock-foto-icone">📷</div>
+          </div>
+          <div class="mock-linha mock-linha-md"></div>
+          <div class="mock-linha mock-linha-sm"></div>
+          <div class="mock-spacer"></div>
+          <div class="mock-render-row">
+            <div class="mock-render mock-render-1"></div>
+            <div class="mock-render mock-render-2"></div>
+            <div class="mock-render mock-render-3"></div>
+          </div>
+          <div class="mock-label">Guia Visual</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ PARA QUEM É ═══════════════════════════════ -->
+<section class="para-quem">
+  <div class="container">
+    <div class="section-eyebrow">Quem usa o guia</div>
+    <h2>FEITO PARA QUEM<br>ESTÁ NA OBRA</h2>
+
+    <div class="perfis-grid">
+      <div class="perfil-card">
+        <div class="perfil-emoji">👷</div>
+        <div class="perfil-titulo">MESTRE DE OBRAS</div>
+        <div class="perfil-desc">Calcule com precisão o que o pedreiro pediu, compare traços, dimensione sem depender de engenheiro para cada dúvida.</div>
+        <div class="perfil-lista">
+          <div class="perfil-item">Cálculo de materiais por etapa</div>
+          <div class="perfil-item">Traços de concreto corretos</div>
+          <div class="perfil-item">Dimensionamento de estrutura</div>
+          <div class="perfil-item">Resposta às normas ABNT</div>
+        </div>
+      </div>
+      <div class="perfil-card" style="border-color: rgba(240,90,26,0.25);">
+        <div class="perfil-emoji">🏠</div>
+        <div class="perfil-titulo">DONO DA OBRA</div>
+        <div class="perfil-desc">Fiscalize cada etapa sem precisar ser técnico. Saiba quando parar, o que verificar e quando chamar reforço.</div>
+        <div class="perfil-lista">
+          <div class="perfil-item">Checklists de qualidade por etapa</div>
+          <div class="perfil-item">Conferência de medição</div>
+          <div class="perfil-item">Negociação com prestadores</div>
+          <div class="perfil-item">Diagnóstico de problemas</div>
+        </div>
+      </div>
+      <div class="perfil-card">
+        <div class="perfil-emoji">📐</div>
+        <div class="perfil-titulo">ENGENHEIRO</div>
+        <div class="perfil-desc">Otimize o tempo em obra, automatize cálculos repetitivos e use a IA como assistente técnico de plantão.</div>
+        <div class="perfil-lista">
+          <div class="perfil-item">Dimensionamentos rápidos</div>
+          <div class="perfil-item">Memória de cálculo automática</div>
+          <div class="perfil-item">Templates de tabelas profissionais</div>
+          <div class="perfil-item">Sugestões de sequência executiva</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ DEPOIMENTOS ═══════════════════════════════ -->
+<section class="depoimentos">
+  <div class="container">
+    <div class="section-eyebrow">O que dizem quem já usa</div>
+    <h2>RESULTADOS REAIS,<br>EM OBRAS REAIS</h2>
+    <p class="depo-intro">De Manaus a Porto Alegre, quem coloca o guia em prática percebe a diferença na primeira etapa.</p>
+
+    <div class="depo-grid">
+      <div class="depo-card">
+        <div class="depo-estrelas">★★★★★</div>
+        <div class="depo-texto">"Pedi o cálculo de ferragem para a fundação e comparei com a lista do meu ferreiro. Tinha 180kg a mais na lista dele. Economizei R$1.400 na primeira etapa."</div>
+        <div class="depo-autor">
+          <div class="depo-avatar" style="background:#E85C1A;">MR</div>
+          <div>
+            <div class="depo-nome">Marcos Ribeiro</div>
+            <div class="depo-cargo">Dono de obra — Goiânia/GO</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="depo-card destaque">
+        <div class="depo-estrelas">★★★★★</div>
+        <div class="depo-texto">"Como mestre de obras, eu resolvia tudo no olhômetro. Agora boto o prompt, coloco os dados e tenho a memória de cálculo completa. Nunca mais errei quantidade de tijolo."</div>
+        <div class="depo-autor">
+          <div class="depo-avatar" style="background:rgba(255,255,255,0.2);">JC</div>
+          <div>
+            <div class="depo-nome">João Carlos Souza</div>
+            <div class="depo-cargo">Mestre de obras — São Paulo/SP</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="depo-card">
+        <div class="depo-estrelas">★★★★★</div>
+        <div class="depo-texto">"O prompt de emergência salvou minha obra. Apareceu uma trinca na parede, joguei a descrição e em 2 minutos já sabia se era estrutural ou não. Não precisei pagar visita de emergência."</div>
+        <div class="depo-autor">
+          <div class="depo-avatar" style="background:#1A4FA0;">PS</div>
+          <div>
+            <div class="depo-nome">Patrícia Saldanha</div>
+            <div class="depo-cargo">Arquiteta autônoma — Recife/PE</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="depo-card">
+        <div class="depo-estrelas">★★★★★</div>
+        <div class="depo-texto">"Usei o checklist de qualidade da alvenaria antes de liberar a laje. Meu pedreiro tinha esquecido 3 vergas. Hoje uso o checklist em toda etapa antes de pagar."</div>
+        <div class="depo-autor">
+          <div class="depo-avatar" style="background:#1D7A50;">AF</div>
+          <div>
+            <div class="depo-nome">Anderson Ferreira</div>
+            <div class="depo-cargo">Dono de obra — Curitiba/PR</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="depo-card">
+        <div class="depo-estrelas">★★★★★</div>
+        <div class="depo-texto">"Tenho 15 anos de obra e aprendi a usar IA com este guia. Hoje respondo dúvidas técnicas dos clientes na hora, sem precisar consultar ninguém. Parece que ganhei um sócio engenheiro."</div>
+        <div class="depo-autor">
+          <div class="depo-avatar" style="background:#B87A00;">RM</div>
+          <div>
+            <div class="depo-nome">Roberto Mendes</div>
+            <div class="depo-cargo">Construtor autônomo — Fortaleza/CE</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="depo-card">
+        <div class="depo-estrelas">★★★★★</div>
+        <div class="depo-texto">"Meu marido não entendia nada de obra. Com o guia, ele mesmo fiscaliza o serviço, faz as perguntas certas ao engenheiro e me liga com o relatório. A obra virou um projeto de família."</div>
+        <div class="depo-autor">
+          <div class="depo-avatar" style="background:#6B3FA0;">CL</div>
+          <div>
+            <div class="depo-nome">Carla Lima</div>
+            <div class="depo-cargo">Dona de obra — Belo Horizonte/MG</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ GARANTIA ═══════════════════════════════ -->
+<section class="garantia-strip">
+  <div class="container">
+    <div class="garantia-inner">
+      <div class="garantia-badge">
+        <div class="garantia-numero">7</div>
+        <div class="garantia-dias">DIAS</div>
+        <div style="font-size:11px;color:var(--cinza);margin-top:4px;font-family:var(--font-mono);">GARANTIA</div>
+      </div>
+      <div class="garantia-texto-area">
+        <h3>RISCO ZERO.<br>CONFIANÇA TOTAL.</h3>
+        <p>Se em 7 dias você não usar nenhum prompt que valha o investimento — ou se o guia não atender às suas expectativas por qualquer motivo — devolvemos 100% do valor pago. Sem perguntas, sem burocracia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ PREÇO ═══════════════════════════════ -->
+<section class="preco-section" id="preco">
+  <div class="container" style="text-align:center;">
+    <div class="section-eyebrow" style="justify-content:center;">Investimento único</div>
+    <h2>SEU PREÇO<br>DE ENTRADA</h2>
+    <p class="preco-intro">Um único pagamento. Acesso imediato e vitalício. Use em quantas obras quiser.</p>
+
+    <!-- GRID DOS DOIS GUIAS INDIVIDUAIS -->
+    <div class="preco-dois-grid">
+
+      <!-- CARD 1: GUIA DE TEXTO -->
+      <div class="preco-card">
+        <div class="preco-topo">📋 GUIA DE TEXTO</div>
+        <div class="preco-corpo">
+          <div class="preco-de">De R$ 97,00</div>
+          <div class="preco-por"><span>R$</span>47</div>
+          <div class="preco-parcelas">ou <strong>2× de R$25,00</strong> no cartão</div>
+
+          <div class="preco-inclusos">
+            <div class="incluso-item">
+              <div class="incluso-check">✓</div>
+              <span>10 etapas e mais de 30 comandos prontos</span>
+            </div>
+            <div class="incluso-item">
+              <div class="incluso-check">✓</div>
+              <span>Checklists de qualidade por etapa</span>
+            </div>
+            <div class="incluso-item">
+              <div class="incluso-check">✓</div>
+              <span>Prompt 0 — configuração do "Modo Engenheiro"</span>
+            </div>
+            <div class="incluso-item">
+              <div class="incluso-check">✓</div>
+              <span>Emergência, negociação e conferência de medição</span>
+            </div>
+            <div class="incluso-item">
+              <div class="incluso-check">✓</div>
+              <span>Acesso vitalício com todas as atualizações</span>
+            </div>
+          </div>
+
+          <button class="btn-comprar" onclick="alert('Página de pagamento em configuração!')">
+            QUERO O GUIA DE TEXTO →
+          </button>
+          <div class="preco-seguro">
+            🔒 PIX, cartão ou boleto
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2: GUIA VISUAL -->
+      <div class="preco-card" style="border-color: rgba(29,122,80,0.35);">
+        <div class="preco-topo" style="background: var(--verde);">📸 GUIA VISUAL</div>
+        <div class="preco-corpo">
+          <div class="preco-de">De R$ 97,00</div>
+          <div class="preco-por"><span>R$</span>47</div>
+          <div class="preco-parcelas">ou <strong>2× de R$25,00</strong> no cartão</div>
+
+          <div class="preco-inclusos">
+            <div class="incluso-item">
+              <div class="incluso-check" style="background:rgba(29,122,80,0.15);border-color:rgba(29,122,80,0.3);color:var(--verde);">✓</div>
+              <span>30+ prompts para análise de fotos da obra</span>
+            </div>
+            <div class="incluso-item">
+              <div class="incluso-check" style="background:rgba(29,122,80,0.15);border-color:rgba(29,122,80,0.3);color:var(--verde);">✓</div>
+              <span>Renders de acabamento antes de comprar</span>
+            </div>
+            <div class="incluso-item">
+              <div class="incluso-check" style="background:rgba(29,122,80,0.15);border-color:rgba(29,122,80,0.3);color:var(--verde);">✓</div>
+              <span>Diagnóstico visual de problemas em fotos</span>
+            </div>
+            <div class="incluso-item">
+              <div class="incluso-check" style="background:rgba(29,122,80,0.15);border-color:rgba(29,122,80,0.3);color:var(--verde);">✓</div>
+              <span>Esboços transformados em projetos visuais</span>
+            </div>
+            <div class="incluso-item">
+              <div class="incluso-check" style="background:rgba(29,122,80,0.15);border-color:rgba(29,122,80,0.3);color:var(--verde);">✓</div>
+              <span>Acesso vitalício com todas as atualizações</span>
+            </div>
+          </div>
+
+          <button class="btn-comprar" style="background: var(--verde);" onclick="alert('Página de pagamento em configuração!')">
+            QUERO O GUIA VISUAL →
+          </button>
+          <div class="preco-seguro">
+            🔒 PIX, cartão ou boleto
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="urgencia" style="max-width:600px;margin:32px auto 0;">
+      ⚡ <strong>Preço de lançamento.</strong> Após as primeiras 200 vendas o valor volta para R$ 197,00 cada.
+      Aproveite enquanto ainda está assim.
+    </div>
+
+    <!-- BUNDLE CARD -->
+    <div style="margin-top:48px;">
+      <div class="preco-bundle-label">OU APROVEITE O PACK COMPLETO</div>
+      <div class="preco-card preco-card-bundle">
+        <div class="preco-topo" style="background: linear-gradient(90deg, var(--laranja), #1D7A50);">
+          🔥 PACK COMPLETO — Guia de Texto + Guia Visual
+        </div>
+        <div class="preco-corpo">
+          <div class="preco-de">De R$ 94,00 (separados)</div>
+          <div style="display:inline-block;background:rgba(74,222,128,0.12);border:1px solid rgba(74,222,128,0.3);border-radius:999px;padding:4px 14px;font-size:13px;font-weight:600;color:#4ADE80;margin-bottom:8px;letter-spacing:0.05em;">🏷️ 10% DE DESCONTO</div>
+          <div class="preco-por" style="font-size:72px;"><span>R$</span>84<span style="font-size:36px;vertical-align:super;line-height:0;">,60</span></div>
+          <div class="preco-parcelas">ou <strong>3× de R$29,90</strong> no cartão · <strong style="color:#4ADE80">Economia de R$9,40</strong></div>
+
+          <div class="preco-inclusos">
+            <div class="incluso-item">
+              <div class="incluso-check">✓</div>
+              <span><strong>Guia de Texto</strong> — 10 etapas, mais de 30 comandos, checklists e cálculos</span>
+            </div>
+            <div class="incluso-item">
+              <div class="incluso-check" style="background:rgba(29,122,80,0.15);border-color:rgba(29,122,80,0.3);color:var(--verde);">✓</div>
+              <span><strong>Guia Visual</strong> — 30+ prompts de imagem, análise de fotos, renders e simulações</span>
+            </div>
+            <div class="incluso-item">
+              <div class="incluso-check">✓</div>
+              <span>Acesso vitalício aos dois guias com todas as atualizações</span>
+            </div>
+            <div class="incluso-item">
+              <div class="incluso-check">✓</div>
+              <span>Cobertura total da obra — do cálculo à imagem</span>
+            </div>
+          </div>
+
+          <button class="btn-comprar" style="background:linear-gradient(90deg, var(--laranja), #1D6B45);" onclick="alert('Página de pagamento em configuração!')">
+            QUERO O PACK COMPLETO →
+          </button>
+          <div class="preco-seguro">
+            🔒 Pagamento 100% seguro · PIX, cartão ou boleto
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ FAQ ═══════════════════════════════ -->
+<section class="faq">
+  <div class="container-sm">
+    <div class="section-eyebrow">Dúvidas frequentes</div>
+    <h2>PERGUNTAS &<br>RESPOSTAS</h2>
+
+    <div class="faq-lista">
+
+      <div class="faq-item">
+        <div class="faq-pergunta" onclick="toggleFaq(this)">
+          Preciso saber usar IA para aproveitar o guia?
+          <span class="faq-seta">+</span>
+        </div>
+        <div class="faq-resposta">Não. O guia foi desenvolvido para quem nunca usou IA antes. Cada prompt está pronto para copiar e colar diretamente no ChatGPT, Claude ou Gemini — todos gratuitos. Você só precisa preencher os dados da sua obra nos campos indicados e a IA faz o trabalho técnico.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-pergunta" onclick="toggleFaq(this)">
+          Os cálculos da IA substituem o engenheiro?
+          <span class="faq-seta">+</span>
+        </div>
+        <div class="faq-resposta">Para quantitativos de materiais, checklists de qualidade e orientações gerais de obra: sim, a IA entrega resultados excelentes. Para projetos estruturais, laudos técnicos e responsabilidade legal de obra: não. O guia é honesto sobre isso — e inclui avisos claros indicando quando é obrigatório contratar um profissional habilitado.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-pergunta" onclick="toggleFaq(this)">
+          Funciona para reforma também, não só obra nova?
+          <span class="faq-seta">+</span>
+        </div>
+        <div class="faq-resposta">Sim. Os prompts funcionam para qualquer tipo de obra: construção nova, reforma, ampliação ou reparo. Você ajusta os dados da sua situação específica e a IA recalcula tudo para o seu contexto.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-pergunta" onclick="toggleFaq(this)">
+          Como recebo o guia depois do pagamento?
+          <span class="faq-seta">+</span>
+        </div>
+        <div class="faq-resposta">O acesso é imediato. Após confirmar o pagamento você recebe o link por e-mail em até 5 minutos. O guia funciona no navegador, no celular ou no computador — sem precisar instalar nada.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-pergunta" onclick="toggleFaq(this)">
+          Qual IA devo usar com o guia?
+          <span class="faq-seta">+</span>
+        </div>
+        <div class="faq-resposta">O guia funciona com qualquer IA de texto: ChatGPT (versão gratuita já funciona), Claude, Gemini, Copilot ou qualquer outro assistente similar. Recomendamos o ChatGPT-4 ou o Claude para os melhores resultados técnicos.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-pergunta" onclick="toggleFaq(this)">
+          E se eu não gostar do guia?
+          <span class="faq-seta">+</span>
+        </div>
+        <div class="faq-resposta">Você tem 7 dias para testar sem risco. Se por qualquer motivo o guia não atender o que você esperava, basta enviar um e-mail e devolvemos o valor integral. Sem questionamentos, sem burocracia.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════ CTA FINAL ═══════════════════════════════ -->
+<section class="cta-final">
+  <div class="container-sm">
+    <h2>
+      SUA PRÓXIMA<br>
+      <span class="laranja">OBRA COMEÇA</span><br>
+      AGORA
+    </h2>
+    <p>Pare de perder dinheiro com estimativas erradas e serviços mal fiscalizados. O engenheiro que você precisava está a um prompt de distância.</p>
+    <a href="supremo_alicerce_guia_imagens.html" class="btn-primary" style="font-size:17px;padding:20px 48px;">
+      QUERO MEUS GUIAS →
+    </a>
+    <p style="margin-top:20px;font-size:13px;color:var(--cinza);">7 dias de garantia · Acesso imediato · Vitalício</p>
+  </div>
+</section>
+
+<!-- RODAPÉ -->
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-logo">
+      <div style="width:28px;height:28px;background:var(--laranja);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;">SA</div>
+      SUPREMO ALICERCE
+    </div>
+    <div class="footer-links">
+      <a href="#">Termos de Uso</a>
+      <a href="#">Política de Privacidade</a>
+      <a href="#">Suporte</a>
+      <a href="#">Contato</a>
+    </div>
+    <div class="footer-copy">
+      © Supremo Alicerce · A melhor base de tecnologia para construção civil
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const aberto = item.classList.contains('aberto');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('aberto'));
+  if (!aberto) item.classList.add('aberto');
+}
+
+// Intersection Observer para animações ao scroll
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.numero-item, .dor-item, .etapa-linha, .perfil-card, .depo-card, .bonus-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
